@@ -25,6 +25,6 @@ password: r3dh4t1!
 
 Once the application is deployed an working you can start working through improvements:
 
-a. Create liveness and readiness checks for the application and database
-b. Explore using the openliberty operator once [available](https://github.com/OpenLiberty/open-liberty-operator/issues/251) in 4.9 or if using an earlier version of OpenShift have at it
-c. Introduce OpenShift GitOps as a way to deploy and manage the application
+*. Create liveness and readiness checks for the application and database
+*. Explore using the openliberty operator once [available](https://github.com/OpenLiberty/open-liberty-operator/issues/251) in 4.9 or if using an earlier version of OpenShift have at it
+*. Introduce OpenShift GitOps as a way to deploy and manage the application
