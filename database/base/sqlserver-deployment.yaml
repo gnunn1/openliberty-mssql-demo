@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sqlserver
+    app.kubernetes.io/component: sqlserver
+    app.kubernetes.io/instance: sqlserver
+    app.openshift.io/runtime: mssql
+    app.openshift.io/runtime-version: 2019-latest
+    app.kubernetes.io/part-of: demo-app
+  name: sqlserver
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: sqlserver
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: sqlserver
+        deploymentconfig: sqlserver
+    spec:
+      containers:
+        - env:
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: SA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sqlserver-sa-password
+                key: sa_password
+          image: mcr.microsoft.com/mssql/rhel/server:2019-latest
+          imagePullPolicy: Always
+          name: sqlserver
+          ports:
+          - containerPort: 1433
+            protocol: TCP
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - name: mssqldb
+              mountPath: /var/opt/mssql
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: mssqldb
+        persistentVolumeClaim:
+          claimName: sqlserver-data
