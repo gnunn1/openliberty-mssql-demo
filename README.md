@@ -1,5 +1,8 @@
 This is a minimal small openliberty and mssql demo using the application from this [repo](https://github.com/Azure-Samples/open-liberty-on-aro/blob/master/guides/howto-integrate-azure-managed-databases.md).
 
+
+![alt text](https://raw.githubusercontent.com/gnunn1/openliberty-mssql-demo/main/docs/img/topology.png)
+
 Rather than use the OpenLiberty operator, which is not currently available in 4.9, it uses a simple Deployment object delivered via kustomize.
 
 To use this demo, run the following steps:
@@ -25,6 +28,6 @@ password: r3dh4t1!
 
 Once the application is deployed an working you can start working through improvements:
 
-*. Create liveness and readiness checks for the application and database
-*. Explore using the openliberty operator once [available](https://github.com/OpenLiberty/open-liberty-operator/issues/251) in 4.9 or if using an earlier version of OpenShift have at it
-*. Introduce OpenShift GitOps as a way to deploy and manage the application
+* Create liveness and readiness checks for the application and database
+* Explore using the openliberty operator once [available](https://github.com/OpenLiberty/open-liberty-operator/issues/251) in 4.9 or if using an earlier version of OpenShift have at it
+* Introduce OpenShift GitOps as a way to deploy and manage the application
